@@ -21,7 +21,8 @@ def ask_user():
     while True:
         user_say = input('Спрашивай: ')
         if user_say in dict.keys():
-            print('value')
+            #print('value')
+            print(dict[user_say])
             #print(dict[])
             break
         else:
