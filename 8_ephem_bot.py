@@ -13,14 +13,13 @@
 
 """
 import logging
-
+import ephem
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
-                    filename='bot.log'
+                    filename='bot3.log'
 )
-
 
 PROXY = {
     'proxy_url': 'socks5://t1.learn.python.ru:1080',
@@ -30,29 +29,49 @@ PROXY = {
     }
 }
 
-
 def greet_user(bot, update):
     text = 'Вызван /start'
     print(text)
     update.message.reply_text(text)
 
-
 def talk_to_me(bot, update):
     user_text = update.message.text 
     print(user_text)
     update.message.reply_text(user_text)
- 
+
+def find_planet_place(bot, update):
+    dt_now = ephem.now()
+    get_planet = update.message.text.split()
+    if get_planet[1] == 'Mars':
+        planet_name = ephem.Mars(dt_now)
+    elif get_planet[1] == 'Jupiter':
+        planet_name = ephem.Jupiter(dt_now)
+    elif get_planet[1] == 'Mercury':
+        planet_name = ephem.Mercury(dt_now)
+    elif get_planet[1] == 'Venus':
+        planet_name = ephem.Venus(dt_now)
+    elif get_planet[1] == 'Saturn':
+        planet_name = ephem.Saturn(dt_now)
+    elif get_planet[1] == 'Uranus':
+        planet_name = ephem.Uranus(dt_now)
+    elif get_planet[1] == 'Neptune':
+        planet_name = ephem.Neptune(dt_now)
+    else:
+        update.message.reply_text('В какой системе эта планета?')
+    planet_constellation = ephem.constellation(planet_name)
+    update.message.reply_text(planet_constellation[1]) 
 
 def main():
-    mybot = Updater("КЛЮЧ, КОТОРЫЙ НАМ ВЫДАЛ BotFather", request_kwargs=PROXY)
+    mybot = Updater("1366818678:AAELr0cWqVmJqqPD0oKkpnMlybdNtaAao1o", request_kwargs=PROXY)
     
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
+    dp.add_handler(CommandHandler("planet", find_planet_place))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
     
+    logging.info("Бот стартовал")
     mybot.start_polling()
     mybot.idle()
        
-
 if __name__ == "__main__":
     main()
