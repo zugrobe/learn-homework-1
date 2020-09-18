@@ -62,7 +62,7 @@ def find_planet_place(bot, update):
     update.message.reply_text(planet_constellation[1]) 
 
 def main():
-    mybot = Updater("1366818678:AAELr0cWqVmJqqPD0oKkpnMlybdNtaAao1o", request_kwargs=PROXY)
+    mybot = Updater("КЛЮЧ, КОТОРЫЙ НАМ ВЫДАЛ BotFather", request_kwargs=PROXY)
     
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
