@@ -16,10 +16,17 @@
 """
 
 def ask_user():
-    """
-    Замените pass на ваш код
-    """
-    pass
+    dict = {"key": "value", "Как дела?": "Хорошо!", "Что делаешь?": "Программирую", "Дуб дерево?": "Нет.", "Динамо бежит?": "Все бегут"}
+
+    while True:
+        user_say = input('Спрашивай: ')
+        if user_say in dict.keys():
+            #print('value')
+            print(dict[user_say])
+            #print(dict[])
+            break
+        else:
+            print('Я не на экзамене: {}'.format(user_say))
     
 if __name__ == "__main__":
     ask_user()
