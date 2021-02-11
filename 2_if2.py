@@ -16,11 +16,26 @@
 """
 
 def main():
-    """
-    Эта функция вызывается автоматически при запуске скрипта в консоли
-    В ней надо заменить pass на ваш код
-    """
-    pass
+    def compare_strings(one, two):
+        if type(one) is not str or type(two) is not str:
+            return '0'
+        elif (one) == (two):
+            return '1'
+        elif (one) != (two) and (two) == 'learn':
+            return '3' 
+        elif (one) != (two) and len(one) > len(two):
+            return '2'
+        else:
+            return 'Первое слово короче, а второе не "learn".'  
+
+    e = compare_strings('yellow', 1)
+    print(e)
+    e = compare_strings('yellow', 'duck')
+    print(e)
+    e = compare_strings('duck', 'learnPY123')
+    print(e)
+    e = compare_strings('yellow', 'learn')
+    print(e)
     
 if __name__ == "__main__":
     main()
